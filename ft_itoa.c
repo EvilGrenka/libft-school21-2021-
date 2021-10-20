@@ -6,7 +6,7 @@
 /*   By: rnoriko <rnoriko@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:39:47 by rnoriko           #+#    #+#             */
-/*   Updated: 2021/10/20 03:52:12 by rnoriko          ###   ########.fr       */
+/*   Updated: 2021/10/20 16:56:38 by rnoriko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	get_len(int nbr)
 	len = 0;
 	if (nbr <= 0)
 		++len;
-	while (nbr != 0)
+	while (nbr)
 	{
 		++len;
 		nbr = nbr / 10;
@@ -41,12 +41,14 @@ char	*ft_itoa(int nbr)
 
 	len = get_len(nbr);
 	result = malloc(sizeof(char) * (len + 1));
+	if (!result)
+		return (NULL);
 	result[len] = '\0';
 	if (nbr < 0)
 		result[0] = '-';
 	else if (nbr == 0)
 		result[0] = '0';
-	while (nbr != 0)
+	while (nbr)
 	{
 		--len;
 		result[len] = absolute_value(nbr % 10) + '0';

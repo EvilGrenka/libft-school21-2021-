@@ -6,7 +6,7 @@
 /*   By: rnoriko <rnoriko@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:21:30 by rnoriko           #+#    #+#             */
-/*   Updated: 2021/10/20 04:02:40 by rnoriko          ###   ########.fr       */
+/*   Updated: 2021/10/20 16:57:43 by rnoriko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,12 @@ char	**ft_split(char const *s, char c)
 	int		count_words;
 	char	**array;
 
+	if (!s)
+		return (NULL);
 	count_words = get_count_words(s, c);
 	array = (char **)malloc(sizeof(char *) * (count_words + 1));
+	if (!array)
+		return (NULL);
 	array[count_words] = NULL;
 	fill_words(array, s, c);
 	return (array);

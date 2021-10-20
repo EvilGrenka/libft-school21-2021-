@@ -6,7 +6,7 @@
 /*   By: rnoriko <rnoriko@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 23:32:03 by rnoriko           #+#    #+#             */
-/*   Updated: 2021/10/20 00:34:26 by rnoriko          ###   ########.fr       */
+/*   Updated: 2021/10/20 04:27:30 by rnoriko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		change_s[i] = (*f)(i, s[i]);
 		i++;
 	}
+	change_s[i] = '\0';
 	return (change_s);
 }

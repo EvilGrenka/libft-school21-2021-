@@ -6,7 +6,7 @@
 /*   By: rnoriko <rnoriko@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 12:20:31 by rnoriko           #+#    #+#             */
-/*   Updated: 2021/10/20 04:06:07 by rnoriko          ###   ########.fr       */
+/*   Updated: 2021/10/20 04:33:28 by rnoriko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ size_t	ft_strlcpy(char *destination, const char *source, size_t dstsize)
 {
 	size_t	i;
 
-	if (!destination || !source)
-		return (0);
 	i = 0;
 	if (dstsize > 0)
 	{
