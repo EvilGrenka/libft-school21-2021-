@@ -6,14 +6,12 @@
 /*   By: rnoriko <rnoriko@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:43:22 by rnoriko           #+#    #+#             */
-/*   Updated: 2021/05/28 12:16:14 by rnoriko          ###   ########.fr       */
+/*   Updated: 2021/10/20 04:07:55 by rnoriko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-
-# define FT_UL_MAX	((unsigned long)(~0L))
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -48,6 +46,7 @@ char	*ft_strchr(const char *s, int c);
 int		ft_tolower(int c);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
+void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);

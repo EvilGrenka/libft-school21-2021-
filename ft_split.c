@@ -6,98 +6,99 @@
 /*   By: rnoriko <rnoriko@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:21:30 by rnoriko           #+#    #+#             */
-/*   Updated: 2021/05/01 20:02:23 by rnoriko          ###   ########.fr       */
+/*   Updated: 2021/10/20 04:02:40 by rnoriko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static unsigned int	ft_get_count_words(char const *s, char c)
+static int	wordlen(const char *str, char c)
 {
-	char			*tmps;
-	unsigned int	count_words;
+	int	len;
 
-	if (!*s)
-		return (0);
-	tmps = (char *)s;
-	count_words = 0;
-	while (*tmps && *tmps == c)
-		tmps++;
-	while (*tmps)
+	len = 0;
+	while (*str != c && *str)
 	{
-		if (*tmps == c)
-		{
-			count_words++;
-			while (*tmps && *tmps == c)
-				tmps++;
-			continue ;
-		}
-		tmps++;
+		len++;
+		str++;
 	}
-	if (*(--tmps) != c)
-		count_words++;
+	return (len);
+}
+
+static int	get_count_words(const char *str, char c)
+{
+	int	count_words;
+
+	count_words = 0;
+	while (*str == c && *str)
+		++str;
+	while (*str)
+	{
+		++count_words;
+		while (*str != c && *str)
+			++str;
+		while (*str == c && *str)
+			++str;
+	}
 	return (count_words);
 }
 
-static void	ft_get_word(char **src_str, unsigned int *word_len, char c)
+static char	*word_dupe(const char *str, char c)
 {
-	unsigned int	i;
+	int		i;
+	int		len;
+	char	*word;
 
-	*src_str += *word_len;
-	*word_len = 0;
 	i = 0;
-	while (**src_str == c && **src_str)
-		(*src_str)++;
-	while ((*src_str)[i])
+	len = wordlen(str, c);
+	word = (char *) malloc(sizeof(char) * (len + 1));
+	if (!word)
+		return (NULL);
+	word[len] = '\0';
+	while (i < len)
 	{
-		if ((*src_str)[i] == c)
-			return ;
-		(*word_len)++;
-		i++;
+		word[i] = str[i];
+		++i;
 	}
+	return (word);
 }
 
-static char	**ft_clear_after_alloc(char **arr_words)
+static void	fill_words(char **array, const char *str, char c)
 {
-	char	**tmp;
+	int	word_index;
 
-	if (!arr_words)
-		return (NULL);
-	tmp = arr_words;
-	while (*tmp)
+	word_index = 0;
+	while (*str == c && *str)
+		++str;
+	while (*str != '\0')
 	{
-		free(*tmp);
-		tmp++;
+		array[word_index] = word_dupe(str, c);
+		if (!array[word_index] && array[0])
+		{
+			while (word_index > -1)
+			{
+				free(array[word_index]);
+				array[word_index] = NULL;
+				word_index--;
+			}
+			return ;
+		}
+		++word_index;
+		while (*str != c && *str)
+			++str;
+		while (*str == c && *str)
+			++str;
 	}
-	free(arr_words);
-	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	unsigned int	i;
-	char			**arr_words;
-	char			*src_str;
-	unsigned int	word_len;
+	int		count_words;
+	char	**array;
 
-	if (!s)
-		return (NULL);
-	arr_words = (char **)malloc(sizeof(char *)
-			* (ft_get_count_words(s, c) + 1));
-	if (!arr_words)
-		return (NULL);
-	i = 0;
-	src_str = (char *)s;
-	word_len = 0;
-	while (i < ft_get_count_words(s, c))
-	{
-		ft_get_word(&src_str, &word_len, c);
-		arr_words[i] = (char *)malloc(sizeof(char) * (word_len + 1));
-		if (!arr_words[i])
-			return (ft_clear_after_alloc(arr_words));
-		ft_strlcpy(arr_words[i], src_str, word_len + 1);
-		i++;
-	}
-	arr_words[i] = NULL;
-	return (arr_words);
+	count_words = get_count_words(s, c);
+	array = (char **)malloc(sizeof(char *) * (count_words + 1));
+	array[count_words] = NULL;
+	fill_words(array, s, c);
+	return (array);
 }

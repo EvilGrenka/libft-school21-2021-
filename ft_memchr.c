@@ -6,7 +6,7 @@
 /*   By: rnoriko <rnoriko@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 11:29:09 by rnoriko           #+#    #+#             */
-/*   Updated: 2021/04/30 15:59:56 by rnoriko          ###   ########.fr       */
+/*   Updated: 2021/10/20 04:00:57 by rnoriko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	void	*tmp_s;
-	size_t	limit;
+	unsigned char	*local_s;
 
-	tmp_s = (void *)s;
-	limit = 0;
-	while (limit < n)
+	local_s = (unsigned char *)s;
+	while (n--)
 	{
-		if (*(unsigned char *)tmp_s == (unsigned char)(c))
-			return (tmp_s);
-		tmp_s++;
-		limit++;
+		if (*local_s == (unsigned char)(c))
+			return (local_s);
+		local_s++;
 	}
 	return (NULL);
 }

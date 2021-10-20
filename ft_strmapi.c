@@ -6,7 +6,7 @@
 /*   By: rnoriko <rnoriko@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 23:32:03 by rnoriko           #+#    #+#             */
-/*   Updated: 2021/04/30 16:00:22 by rnoriko          ###   ########.fr       */
+/*   Updated: 2021/10/20 00:34:26 by rnoriko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*tmpstr;
+	char	*change_s;
 	size_t	i;
 
-	if (!s)
+	if (!s || !f)
 		return (NULL);
-	tmpstr = ft_strdup(s);
-	if (!tmpstr)
+	change_s = (char *) malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!change_s)
 		return (NULL);
 	i = 0;
-	while (tmpstr[i])
+	while (s[i])
 	{
-		tmpstr[i] = (*f)(i, tmpstr[i]);
+		change_s[i] = (*f)(i, s[i]);
 		i++;
 	}
-	return (tmpstr);
+	return (change_s);
 }

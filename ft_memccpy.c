@@ -6,7 +6,7 @@
 /*   By: rnoriko <rnoriko@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:22:28 by rnoriko           #+#    #+#             */
-/*   Updated: 2021/04/30 15:59:55 by rnoriko          ###   ########.fr       */
+/*   Updated: 2021/10/20 04:04:40 by rnoriko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 void	*ft_memccpy(void *destination, const void *source, int c, size_t n)
 {
-	size_t	l;
+	const unsigned char	*local_source;
+	unsigned char		*local_destination;
 
-	l = 0;
-	while (l < n)
+	local_source = source;
+	local_destination = destination;
+	while (n--)
 	{
-		*(unsigned char *)(destination + l) = *(unsigned char *)(source + l);
-		if (*(unsigned char *)(source + l) == (unsigned char)c)
-			return (destination + (++l));
-		l++;
+		*local_destination = *local_source;
+		if (*local_source == (unsigned char)c)
+			return (++local_destination);
+		++local_source;
+		++local_destination;
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: rnoriko <rnoriko@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 12:20:31 by rnoriko           #+#    #+#             */
-/*   Updated: 2021/04/30 16:00:19 by rnoriko          ###   ########.fr       */
+/*   Updated: 2021/10/20 04:06:07 by rnoriko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 size_t	ft_strlcpy(char *destination, const char *source, size_t dstsize)
 {
-	size_t	srclen;
+	size_t	i;
 
-	if (!source)
+	if (!destination || !source)
 		return (0);
-	srclen = ft_strlen(source);
-	if (srclen + 1 < dstsize)
+	i = 0;
+	if (dstsize > 0)
 	{
-		ft_memcpy(destination, source, srclen + 1);
+		while (source[i] && i < (dstsize - 1))
+		{
+			destination[i] = source[i];
+			i++;
+		}
+		destination[i] = '\0';
 	}
-	else if (dstsize != 0)
-	{
-		ft_memcpy(destination, source, dstsize - 1);
-		destination[dstsize - 1] = '\0';
-	}
-	return (srclen);
+	return (ft_strlen(source));
 }

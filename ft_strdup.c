@@ -6,7 +6,7 @@
 /*   By: rnoriko <rnoriko@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:22:41 by rnoriko           #+#    #+#             */
-/*   Updated: 2021/04/30 16:00:15 by rnoriko          ###   ########.fr       */
+/*   Updated: 2021/10/19 23:29:57 by rnoriko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 char	*ft_strdup(const char *s1)
 {
-	char	*str_heap;
+	char	*strdup;
 	size_t	i;
 
-	str_heap = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
-	if (str_heap)
+	strdup = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (strdup)
 	{
 		i = 0;
 		while (s1[i])
 		{
-			str_heap[i] = s1[i];
+			strdup[i] = s1[i];
 			i++;
 		}
-		str_heap[i] = '\0';
+		strdup[i] = '\0';
 	}
-	return (str_heap);
+	return (strdup);
 }
